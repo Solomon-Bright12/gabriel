@@ -32,23 +32,32 @@ export default function Contact() {
     setErrors({});
     setFormState('sending');
 
-    // Build mailto link as fallback — opens default email client
-    // For a real send, replace with your API endpoint or emailjs/formspree integration
-    const name = data.get('name');
-    const email = data.get('email');
-    const subject = data.get('subject');
-    const message = data.get('message');
-    const emailAddress = "barclaygabrielsickgamer@gmail.com"
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          subject: data.get('subject'),
+          message: data.get('message'),
+          type: data.get('type') || undefined,
+        }),
+      });
 
-    const body = `From: ${name} <${email}>\n\n${message}`;
-    const mailtoLink = `mailto:${emailAddress}?subject=${encodeURIComponent(subject as string)}&body=${encodeURIComponent(body)}`;
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        throw new Error(json.error || 'Server error');
+      }
 
-    // Simulate async (replace with real fetch to API if needed)
-    await new Promise((r) => setTimeout(r, 800));
-    window.open(mailtoLink, '_blank');
-    setFormState('success');
-    formRef.current?.reset();
-    setTimeout(() => setFormState('idle'), 5000);
+      setFormState('success');
+      formRef.current?.reset();
+      setTimeout(() => setFormState('idle'), 6000);
+    } catch (err) {
+      console.error(err);
+      setFormState('error');
+      setTimeout(() => setFormState('idle'), 5000);
+    }
   };
 
   const fieldError = (name: string) =>
@@ -188,7 +197,25 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="font-serif text-xl text-white mb-2">Message Sent</p>
-                      <p className="font-sans text-sm text-gray-400">Thank you for reaching out. Your email client should have opened. We will be in touch shortly.</p>
+                      <p className="font-sans text-sm text-gray-400">Thank you for reaching out. Gabriel will respond personally within 24–48 hours. A confirmation has been sent to your inbox.</p>
+                    </div>
+                  </motion.div>
+                ) : formState === 'error' ? (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="flex flex-col items-center justify-center py-16 gap-5 text-center"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center">
+                      <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="font-serif text-xl text-white mb-2">Something Went Wrong</p>
+                      <p className="font-sans text-sm text-gray-400">Your message could not be delivered. Please try again, or reach out via WhatsApp for immediate assistance.</p>
                     </div>
                   </motion.div>
                 ) : (
@@ -325,7 +352,7 @@ export default function Contact() {
                     </div>
 
                     <p className="font-sans text-xs text-gray-600 mt-1">
-                      * Required fields. Your email client will open to send the message directly.
+                      * Required fields. Your message is sent directly — no email client needed.
                     </p>
                   </motion.form>
                 )}

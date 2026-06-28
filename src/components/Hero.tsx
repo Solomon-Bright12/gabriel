@@ -54,7 +54,7 @@ export default function Hero() {
           className="mb-6"
         >
           <span className="font-sans text-xs sm:text-sm tracking-[0.3em] text-amberGold uppercase mb-4 block">
-            Digital Art & Illustrations
+            Traditional & Digital Art
           </span>
           <h1 className="font-serif text-5xl sm:text-7xl md:text-9xl text-white font-normal leading-none tracking-tight text-glow uppercase">
             Gabriel

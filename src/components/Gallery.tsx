@@ -159,7 +159,7 @@ function FilterBtn({
 }
 
 // ─── Main Gallery ──────────────────────────────────────────────────────────────
-type Filter = 'all' | '2024' | '2025' | 'gold' | 'crimson';
+type Filter = 'all' | 'traditional' | 'digital' | '2024' | '2025' | 'gold' | 'crimson';
 
 export default function Gallery() {
   const [selected, setSelected] = useState<Painting | null>(null);
@@ -167,6 +167,8 @@ export default function Gallery() {
 
   const filtered = paintings.filter((p) => {
     if (filter === 'all') return true;
+    if (filter === 'traditional') return p.medium !== 'Digital Art';
+    if (filter === 'digital') return p.medium === 'Digital Art';
     if (filter === '2024') return p.year === '2024';
     if (filter === '2025') return p.year === '2025';
     if (filter === 'gold') return p.accentColor === 'gold';
@@ -201,7 +203,7 @@ export default function Gallery() {
           </div>
 
           <p className="font-sans text-gray-500 text-sm leading-relaxed max-w-xl font-light">
-            An exploration of digital artistry — each piece a portal into
+            An exploration of traditional and digital artistry — each piece a portal into
             colour, emotion, and the unseen forces that shape the human
             experience. Select any work to examine it in full and inquire about
             acquisition.
@@ -222,6 +224,8 @@ export default function Gallery() {
           {(
             [
               ['all', 'All Works'],
+              ['traditional', 'Traditional'],
+              ['digital', 'Digital'],
               ['2024', '2024'],
               ['2025', '2025'],
               ['gold', 'Gold Palette'],

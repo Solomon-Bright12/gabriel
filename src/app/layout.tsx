@@ -17,9 +17,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Gabriel Barclay | Digital Art",
-  description: "Contemporary digital art and illustration portfolio by Gabriel Barclay. Explore the vibrant works.",
-  keywords: ["digital art", "contemporary artist", "art portfolio", "illustration", "Gabriel Barclay"],
+  title: "Gabriel Barclay | Traditional & Digital Art",
+  description: "Contemporary portfolio of traditional and digital art and illustration by Gabriel Barclay. Explore the vibrant works.",
+  keywords: ["traditional art", "digital art", "contemporary artist", "art portfolio", "illustration", "Gabriel Barclay"],
 };
 
 export default function RootLayout({
