@@ -19,7 +19,7 @@ export default function About() {
           <h2 className="font-serif text-4xl sm:text-6xl text-white mb-8">About Gabriel Barclay</h2>
           <div className="font-sans text-gray-400 text-sm sm:text-base leading-relaxed font-light space-y-6">
             <p>
-              Gabriel Barclay's artwork spans both traditional canvas and digital illustration, born from a fascination with perspective, vibrant colors, and deep storytelling. His works explore the boundaries of scale and emotion, utilizing bold shapes and contrasting hues across multiple mediums.
+              Gabby artwork spans both traditional canvas and digital illustration, born from a fascination with perspective, vibrant colors, and deep storytelling. His works explore the boundaries of scale and emotion, utilizing bold shapes and contrasting hues across multiple mediums.
             </p>
             <p>
               Each piece is an attempt to capture the weight of a moment. By blending surreal elements with relatable interactions, he creates works that act as visual anchors, inviting viewers into an imaginative yet familiar world.

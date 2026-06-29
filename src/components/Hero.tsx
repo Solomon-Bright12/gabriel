@@ -57,7 +57,7 @@ export default function Hero() {
             Traditional & Digital Art
           </span>
           <h1 className="font-serif text-5xl sm:text-7xl md:text-9xl text-white font-normal leading-none tracking-tight text-glow uppercase">
-            Gabriel
+           Gabby
             <br />
             <span className="text-gray-400 italic font-light text-4xl sm:text-6xl md:text-8xl lowercase">Barclay</span>
           </h1>
